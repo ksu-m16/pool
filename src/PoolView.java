@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -20,12 +21,13 @@ import javax.swing.JTextArea;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 
 public class PoolView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextArea txtrSet;
+	private JLabel txtrSet;
 	private PoolController controller ;
 	private AbstractButton radioButton;
 	private AbstractButton radioButton_1;
@@ -81,8 +83,7 @@ public class PoolView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("48dlu"),
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -99,15 +100,8 @@ public class PoolView extends JFrame {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,},
+				ColumnSpec.decode("max(4dlu;default)"),
+				ColumnSpec.decode("max(65dlu;default)"),},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
@@ -127,68 +121,91 @@ public class PoolView extends JFrame {
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		
-		txtrSet = new JTextArea();
-		txtrSet.setBackground(UIManager.getColor("Menu.background"));
+		txtrSet = new JLabel();
 		
 		
-		contentPane.add(txtrSet, "4, 2, 9, 1, fill, top");
+		
+		contentPane.add(txtrSet, "2, 2, 8, 1, fill, top");
 		
 		radioButton = new JRadioButton("");
-		contentPane.add(radioButton, "18, 2");
+		radioButton.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton, "11, 2");
 		
 		radioButton_1 = new JRadioButton("");
-		contentPane.add(radioButton_1, "16, 4");
+		radioButton_1.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_1, "9, 4");
 		
 		radioButton_5 = new JRadioButton("");
-		contentPane.add(radioButton_5, "20, 4");
+		radioButton_5.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_5, "13, 4");
 		
 		radioButton_2 = new JRadioButton("");
-		contentPane.add(radioButton_2, "14, 6");
+		radioButton_2.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_2, "7, 6");
 		
 		radioButton_6 = new JRadioButton("");
-		contentPane.add(radioButton_6, "18, 6");
+		radioButton_6.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_6, "11, 6");
 		
 		radioButton_9 = new JRadioButton("");
-		contentPane.add(radioButton_9, "22, 6");
+		radioButton_9.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_9, "15, 6");
 		
 		radioButton_3 = new JRadioButton("");
-		contentPane.add(radioButton_3, "12, 8");
+		radioButton_3.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_3, "5, 8");
 		
 		radioButton_7 = new JRadioButton("");
-		contentPane.add(radioButton_7, "16, 8");
+		radioButton_7.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_7, "9, 8");
 		
 		radioButton_10 = new JRadioButton("");
+		radioButton_10.setHorizontalAlignment(SwingConstants.CENTER);
 		radioButton_10.setBackground(Color.BLACK);
 		radioButton_10.setForeground(Color.LIGHT_GRAY);
-		contentPane.add(radioButton_10, "20, 8, fill, fill");
+		contentPane.add(radioButton_10, "13, 8, fill, fill");
 		
 		radioButton_12 = new JRadioButton("");
-		contentPane.add(radioButton_12, "24, 8");
+		radioButton_12.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_12, "17, 8");
 		
 		radioButton_4 = new JRadioButton("");
-		contentPane.add(radioButton_4, "10, 10");
+		radioButton_4.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_4, "3, 10");
 		
 		radioButton_8 = new JRadioButton("");
-		contentPane.add(radioButton_8, "14, 10");
+		radioButton_8.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_8, "7, 10");
 		
 		radioButton_11 = new JRadioButton("");
-		contentPane.add(radioButton_11, "18, 10");
+		radioButton_11.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_11, "11, 10");
 		
 		radioButton_13 = new JRadioButton("");
-		contentPane.add(radioButton_13, "22, 10");
+		radioButton_13.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_13, "15, 10");
 		
 		radioButton_14 = new JRadioButton("");
-		contentPane.add(radioButton_14, "26, 10");
+		radioButton_14.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(radioButton_14, "19, 10");
 		
 		
 		btnCalculate = new JButton("Calculate!");
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.generateSets();
-				setButtons(controller.getNextSet());
-				txtrSet.setText("Set 1 / " + controller.getCount());
-				btnNext.setEnabled(true);
-				btnCalculate.setEnabled(false);
+						
+				try {
+					setButtons(controller.getNextSet());
+					txtrSet.setText("Set 1 / " + controller.getCount());
+					btnNext.setEnabled(true);
+					btnCalculate.setEnabled(false);
+				}
+				catch (NullPointerException e) {
+					txtrSet.setText("No solutions found");
+					btnNext.setEnabled(false);
+					btnCalculate.setEnabled(false);
+				}
 			}
 		});
 		
@@ -202,8 +219,8 @@ public class PoolView extends JFrame {
 				txtrSet.setText("Set " + controller.getSetNum() + " / " + controller.getCount());
 			}
 		});
-		contentPane.add(btnCalculate, "14, 14, 9, 1");
-		contentPane.add(btnNext, "14, 16, 9, 1");
+		contentPane.add(btnCalculate, "7, 14, 9, 1");
+		contentPane.add(btnNext, "7, 16, 9, 1");
 
 	}
 

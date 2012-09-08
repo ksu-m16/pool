@@ -27,6 +27,10 @@ public class PoolController {
 	}
 	
 	public int[] getNextSet(){
+		if (model.getCount() == 0){
+			return null;
+		}
+		
 		if (nSet >= model.getCount()){
 			nSet = model.getCount() % nSet;
 		}
@@ -38,31 +42,23 @@ public class PoolController {
 	
 	private int[] setCodeToSet(int setCode) {
 		int[] set = new int[15];
-		String binSet = Integer.toBinaryString(setCode);
-		char[] b = binSet.toCharArray();
-		if(b.length < 14){
-			char[] tempb = new char[14];
-			Arrays.fill(tempb, '0');
-			for (int i = 14 - b.length; i < 14; i++) {
-			tempb[i] = b[i - (14 - b.length)];
-			}
-			b = tempb;
-		}
-		set[0] = Integer.parseInt("" + b[0]);
-		set[1] = Integer.parseInt("" + b[1]);
-		set[2] = Integer.parseInt("" + b[2]);
-		set[3] = Integer.parseInt("" + b[3]);
-		set[4] = Integer.parseInt("" + b[4]);
-		set[5] = Integer.parseInt("" + b[5]);
-		set[6] = Integer.parseInt("" + b[6]);
-		set[7] = Integer.parseInt("" + b[7]);
-		set[8] = Integer.parseInt("" + b[8]);
-		set[9] = Integer.parseInt("" + b[9]);
+		
+	
+		set[0] = ((setCode & (1<<0))== 0) ? 0 : 1;
+		set[1] = ((setCode & (1<<1))== 0) ? 0 : 1;
+		set[2] = ((setCode & (1<<2))== 0) ? 0 : 1;
+		set[3] = ((setCode & (1<<3))== 0) ? 0 : 1;
+		set[4] = ((setCode & (1<<4))== 0) ? 0 : 1;
+		set[5] = ((setCode & (1<<5))== 0) ? 0 : 1;
+		set[6] = ((setCode & (1<<6))== 0) ? 0 : 1;
+		set[7] = ((setCode & (1<<7))== 0) ? 0 : 1;
+		set[8] = ((setCode & (1<<8))== 0) ? 0 : 1;
+		set[9] = ((setCode & (1<<9))== 0) ? 0 : 1;
 		set[10] = 2;
-		set[11] = Integer.parseInt("" + b[10]);
-		set[12] = Integer.parseInt("" + b[11]);
-		set[13] = Integer.parseInt("" + b[12]);
-		set[14] = Integer.parseInt("" + b[13]);
+		set[11] = ((setCode & (1<<10))== 0) ? 0 : 1;
+		set[12] = ((setCode & (1<<11))== 0) ? 0 : 1;
+		set[13] = ((setCode & (1<<12))== 0) ? 0 : 1;
+		set[14] = ((setCode & (1<<13))== 0) ? 0 : 1;
 		
 		return set;
 	}

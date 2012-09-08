@@ -13,41 +13,33 @@ public class PoolModel {
 
 	public void generateSets() {
 		sets = new ArrayList<Integer>();
-		for(int s = 0; s <= 16383; s++ ){
+		for(int s = 0; s <= 32767; s++ ){
 			fillTriangle(s);
 			if (isPossible()){
 				sets.add(s);
-//				printBalls();
-//				System.out.println(s);
+				printBalls();
+
 			}
 		}
+//		System.out.println(Integer.toBinaryString(32768-1));
 	}
 	
-	private void fillTriangle(int set) {
-		String binSet = Integer.toBinaryString(set);
-		char[] b = binSet.toCharArray();
-		if(b.length < 14){
-			char[] tempb = new char[14];
-			Arrays.fill(tempb, '0');
-			for (int i = 14 - b.length; i < 14; i++) {
-			tempb[i] = b[i - (14 - b.length)];
-			}
-			b = tempb;
-		}
-		balls[0][0] = Integer.parseInt("" + b[0]);
-		balls[1][0] = Integer.parseInt("" + b[1]);
-		balls[2][0] = Integer.parseInt("" + b[2]);
-		balls[3][0] = Integer.parseInt("" + b[3]);
-		balls[4][0] = Integer.parseInt("" + b[4]);
-		balls[0][1] = Integer.parseInt("" + b[5]);
-		balls[1][1] = Integer.parseInt("" + b[6]);
-		balls[2][1] = Integer.parseInt("" + b[7]);
-		balls[3][1] = Integer.parseInt("" + b[8]);
-		balls[0][2] = Integer.parseInt("" + b[9]);
-		balls[2][2] = Integer.parseInt("" + b[10]);
-		balls[0][3] = Integer.parseInt("" + b[11]);
-		balls[1][3] = Integer.parseInt("" + b[12]);
-		balls[0][4] = Integer.parseInt("" + b[13]);
+	public void fillTriangle(int set) {
+
+		balls[0][0] = ((set & (1<<0))== 0) ? 0 : 1;
+		balls[1][0] = ((set & (1<<1))== 0) ? 0 : 1;
+		balls[2][0] = ((set & (1<<2))== 0) ? 0 : 1;
+		balls[3][0] = ((set & (1<<3))== 0) ? 0 : 1;
+		balls[4][0] = ((set & (1<<4))== 0) ? 0 : 1;
+		balls[0][1] = ((set & (1<<5))== 0) ? 0 : 1;
+		balls[1][1] = ((set & (1<<6))== 0) ? 0 : 1;
+		balls[2][1] = ((set & (1<<7))== 0) ? 0 : 1;
+		balls[3][1] = ((set & (1<<8))== 0) ? 0 : 1;
+		balls[0][2] = ((set & (1<<9))== 0) ? 0 : 1;
+		balls[2][2] = ((set & (1<<10))== 0) ? 0 : 1;
+		balls[0][3] = ((set & (1<<11))== 0) ? 0 : 1;
+		balls[1][3] = ((set & (1<<12))== 0) ? 0 : 1;
+		balls[0][4] = ((set & (1<<13))== 0) ? 0 : 1;
 		
 		balls[1][2] = 2;
 		}

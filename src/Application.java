@@ -8,6 +8,7 @@ public class Application {
 		PoolController c = new PoolController();
 		c.setModel(m);
 		v.setController(c);
+		m.generateSets();
 		v.run();				
 		
 	}
