@@ -13,8 +13,11 @@ public class PoolModel {
 
 	public void generateSets() {
 		sets = new ArrayList<Integer>();
+
 		for(int s = 0; s <= 32767; s++ ){
+
 			fillTriangle(s);
+			printBalls();
 			if (isPossible()){
 				sets.add(s);
 				printBalls();
@@ -24,6 +27,7 @@ public class PoolModel {
 //		System.out.println(Integer.toBinaryString(32768-1));
 	}
 	
+
 	public void fillTriangle(int set) {
 
 		balls[0][0] = ((set & (1<<0))== 0) ? 0 : 1;
@@ -40,8 +44,10 @@ public class PoolModel {
 		balls[0][3] = ((set & (1<<11))== 0) ? 0 : 1;
 		balls[1][3] = ((set & (1<<12))== 0) ? 0 : 1;
 		balls[0][4] = ((set & (1<<13))== 0) ? 0 : 1;
+
 		
 		balls[1][2] = 2;
+		printBalls();
 		}
 	
 	boolean isPossible() {

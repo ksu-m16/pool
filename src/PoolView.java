@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
@@ -78,7 +79,11 @@ public class PoolView extends JFrame {
 		setTitle("Pool Set Generator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
+		contentPane = new JPanel(){
+			public void paint(Graphics g) {				
+				drawSolution(g);
+			};
+		};
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
@@ -194,6 +199,13 @@ public class PoolView extends JFrame {
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.generateSets();
+
+//				setButtons(controller.getNextSet());
+				
+				txtrSet.setText("Set 1 / " + controller.getCount());
+				btnNext.setEnabled(true);
+				btnCalculate.setEnabled(false);
+
 						
 				try {
 					setButtons(controller.getNextSet());
@@ -206,6 +218,7 @@ public class PoolView extends JFrame {
 					btnNext.setEnabled(false);
 					btnCalculate.setEnabled(false);
 				}
+
 			}
 		});
 		
@@ -215,7 +228,9 @@ public class PoolView extends JFrame {
 		btnNext.setEnabled(false);
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setButtons(controller.getNextSet());
+				
+//				drawSolution(Graphics g);
+//				setButtons(controller.getNextSet());
 				txtrSet.setText("Set " + controller.getSetNum() + " / " + controller.getCount());
 			}
 		});
@@ -224,22 +239,68 @@ public class PoolView extends JFrame {
 
 	}
 
-	private void setButtons(int[] set){
-		radioButton.setSelected(set[0] != 1);
-		radioButton_1.setSelected(set[1] != 1);
-		radioButton_2.setSelected(set[2] != 1);
-		radioButton_3.setSelected(set[3] != 1);
-		radioButton_4.setSelected(set[4] != 1);
-		radioButton_5.setSelected(set[5] != 1);
-		radioButton_6.setSelected(set[6] != 1);
-		radioButton_7.setSelected(set[7] != 1);
-		radioButton_8.setSelected(set[8] != 1);
-		radioButton_9.setSelected(set[9] != 1);
-		radioButton_10.setSelected(set[10] != 1);
-		radioButton_11.setSelected(set[11] != 1);
-		radioButton_12.setSelected(set[12] != 1);
-		radioButton_13.setSelected(set[12] != 1);
-		radioButton_14.setSelected(set[14] != 1);
+//	private void setButtons(int[] set){
+//		radioButton.setSelected(set[0] != 1);
+//		radioButton_1.setSelected(set[1] != 1);
+//		radioButton_2.setSelected(set[2] != 1);
+//		radioButton_3.setSelected(set[3] != 1);
+//		radioButton_4.setSelected(set[4] != 1);
+//		radioButton_5.setSelected(set[5] != 1);
+//		radioButton_6.setSelected(set[6] != 1);
+//		radioButton_7.setSelected(set[7] != 1);
+//		radioButton_8.setSelected(set[8] != 1);
+//		radioButton_9.setSelected(set[9] != 1);
+//		radioButton_10.setSelected(set[10] != 1);
+//		radioButton_11.setSelected(set[11] != 1);
+//		radioButton_12.setSelected(set[12] != 1);
+//		radioButton_13.setSelected(set[12] != 1);
+//		radioButton_14.setSelected(set[14] != 1);
+//		
+//	}
+//	public void drawSolution(Graphics g, int sol) {	
+	public void drawSolution(Graphics g) {		
+		int sol = controller.getNext();
 		
+		int s = 30; //space between balls
+		int d = 10; //ball diameter
+		int d2 = d + 2*s;
+		
+		Color vc = new Color(0xFF00FF);
+		Color vca = new Color(0x20FF00FF, true);
+		Color gc = new Color(0x00FF00);
+		Color gca = new Color(0x2000FF00, true);
+		Color bc = new Color(0x000000);
+		Color bca = new Color(0x20000000, true);				
+		
+		Color f = vc;
+		Color fa = vca;
+		
+		for (int row = 0; row < 5; ++row) {
+			for (int col = 0; col <= 5 - row; ++col) {
+				int x = s + row * (d/2 + s );
+				int y = s + d/2 + col*(d + s);
+								
+				if ((sol & 1) != 0) {
+					f = vc;
+					fa = vca;
+				} else {
+					f = gc;
+					fa = gca;
+				}
+				
+				if ((row == 2) && (col == 1)) {
+					f = bc;
+					fa = bca;
+				}
+
+				g.setColor(f);
+				g.fillOval(x - d/2, y - d/2, d, d);
+				g.setColor(fa);
+				g.fillOval(x - d2/2, y - d2/2, d2, d2);				
+				sol >>= 1;
+			}			
+		}				
 	}
+	
+	
 }

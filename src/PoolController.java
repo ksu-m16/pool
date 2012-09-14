@@ -37,6 +37,12 @@ public class PoolController {
 		return setCodeToSet((int)(model.getSets()).get(nSet++));
 	}
 	
+	public int getNext(){
+		if (nSet >= model.getCount()){
+			nSet = model.getCount() % nSet;
+		}
+		return (model.getSets()).get(nSet++);
+	}
 	
 	
 	
