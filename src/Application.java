@@ -10,7 +10,7 @@ public class Application {
 		v.setController(c);
 
 		m.generateSets();
-		v.run();				
+//		v.run();				
 
 		
 	}

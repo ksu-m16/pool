@@ -13,7 +13,7 @@ public class PoolModel {
 		sets = new ArrayList<Integer>();
 
 		for(int s = 0; s <= 32767; s++ ){
-//			25298
+//			int s = 25490;
 			fillTriangle(s);
 //			printBalls();
 			if (isPossible()){
@@ -56,7 +56,7 @@ public class PoolModel {
 	
 	boolean isPossible() {
 		boolean possible ;
-		possible = checkCount() && checkColumns() && checkRaw() && checkTriangles()
+		possible = balls[1][2] == 0 && checkCount() && checkColumns() && checkRaw() && checkTriangles()
 				&& countDiag();
 //		possible = checkCount() && checkColumns() && checkRaw() && checkTriangles();
 		
@@ -71,7 +71,7 @@ public class PoolModel {
 				}
 			}
 		}
-		return n == 7 && balls[1][2] == 0;
+		return n == 7 ;
 
 	}
 	
@@ -82,6 +82,10 @@ public class PoolModel {
 				if (balls[i][j] == balls[i + 1][j]){
 					++count;
 				}
+				else {
+					count = 0;
+				}
+				
 				if (count == 2) {
 					return false;
 				}
@@ -96,6 +100,9 @@ public class PoolModel {
 			for (int j = 0; i + j < 5 - 1; j++) {
 				if (balls[i][j] == balls[i][j + 1]) {
 					count++;
+				}
+				else {
+					count = 0;
 				}
 				if (count == 2) {
 					return false;
@@ -117,40 +124,23 @@ public class PoolModel {
 	}
 
 	private boolean checkBallTriangles(int i, int j) {
-		int count = 0;
 		int tm = balls[i][j];
-		if (i != 0) {
-			if (tm == balls[i - 1][j] ){
-				count++;
+		if (i != 0 && j != 0) {
+			if ((tm == balls[i - 1][j] ) && (tm == balls[i][j - 1])){
+				return false;
 //				System.out.println(count + "up" );
-			}
-		}
-		if (j != 0) {
-			if (tm == balls[i][j - 1]){
-			count++;
 //				System.out.println(count + "left");
 			}
 		}
-		if (count == 2) {
-			return false;
-		}
-		count = 0;
+
+//		count = 0;
 		if (i + j < 5 - 1) {
-			if (tm == balls[i][j + 1]){
-				count++;
+			if ((tm == balls[i][j + 1]) && (tm == balls[i + 1][j])){
 //				System.out.println(count + "right" );
-			}
-			if (tm == balls[i + 1][j]){
-				count++;
 //				System.out.println(count + "down");
+				return false;
 			}
 		}
-		
-//		System.out.println(count + " i = " + i + "; j = " + j);
-		if (count == 2) {
-			return false;
-		}
-		
 	return true;
 }
 
@@ -160,16 +150,12 @@ public class PoolModel {
 		{
 			for (int j = 0; j < 5 - i; j++) 
 			{
-//				System.out.println(checkBallDiag (balls, i, j) + "i = " + i + "; j = " + j);
 				if (! checkBallDiag(i, j)){
 					return false;
 				}
 			}
 		}
-		if ((balls[0][0] == balls[1][1] && balls[0][0] == balls[2][2])){
-			return false;
-		}
-		
+	
 		return true;
 	}
 	private boolean checkBallDiag(int i, int j) {
