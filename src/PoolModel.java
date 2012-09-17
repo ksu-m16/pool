@@ -9,22 +9,23 @@ public class PoolModel {
 		return sets;
 	}
 	
-	
-
 	public void generateSets() {
 		sets = new ArrayList<Integer>();
 
 		for(int s = 0; s <= 32767; s++ ){
-
+//			25298
 			fillTriangle(s);
-			printBalls();
+//			printBalls();
 			if (isPossible()){
 				sets.add(s);
 				printBalls();
+				System.out.println(s);
 
 			}
 		}
-//		System.out.println(Integer.toBinaryString(32768-1));
+		
+		System.out.println(getCount());
+		
 	}
 	
 
@@ -40,20 +41,25 @@ public class PoolModel {
 		balls[2][1] = ((set & (1<<7))== 0) ? 0 : 1;
 		balls[3][1] = ((set & (1<<8))== 0) ? 0 : 1;
 		balls[0][2] = ((set & (1<<9))== 0) ? 0 : 1;
-		balls[2][2] = ((set & (1<<10))== 0) ? 0 : 1;
-		balls[0][3] = ((set & (1<<11))== 0) ? 0 : 1;
-		balls[1][3] = ((set & (1<<12))== 0) ? 0 : 1;
-		balls[0][4] = ((set & (1<<13))== 0) ? 0 : 1;
+		
+		balls[1][2] = ((set & (1<<10))== 0) ? 0 : 1;
+		
+		balls[2][2] = ((set & (1<<11))== 0) ? 0 : 1;
+		balls[0][3] = ((set & (1<<12))== 0) ? 0 : 1;
+		balls[1][3] = ((set & (1<<13))== 0) ? 0 : 1;
+		balls[0][4] = ((set & (1<<14))== 0) ? 0 : 1;
 
 		
-		balls[1][2] = 2;
-		printBalls();
+//		balls[1][2] = 2;
+//		printBalls();
 		}
 	
 	boolean isPossible() {
 		boolean possible ;
 		possible = checkCount() && checkColumns() && checkRaw() && checkTriangles()
 				&& countDiag();
+//		possible = checkCount() && checkColumns() && checkRaw() && checkTriangles();
+		
 		return possible;
 	}
 	private boolean checkCount() {
@@ -65,16 +71,15 @@ public class PoolModel {
 				}
 			}
 		}
-		return n == 7;
+		return n == 7 && balls[1][2] == 0;
+
 	}
 	
 	private boolean checkColumns() {
 		for (int j = 0; j < 5; j++) {
 			int count = 0;
 			for (int i = 0; i + j < 5 - 1; i++) {
-				if ((balls[i][j] == balls[i + 1][j])
-						|| (balls[i][j] == 0 && balls[i + 1][j] == 2)
-						|| (balls[i][j] == 2 && balls[i + 1][j] == 0)) {
+				if (balls[i][j] == balls[i + 1][j]){
 					++count;
 				}
 				if (count == 2) {
@@ -89,9 +94,7 @@ public class PoolModel {
 		for (int i = 0; i < 5; i++) {
 			int count = 0;
 			for (int j = 0; i + j < 5 - 1; j++) {
-				if ((balls[i][j] == balls[i][j + 1])
-						|| (balls[i][j] == 0 && balls[i][j + 1] == 2)
-						|| (balls[i][j] == 2 && balls[i][j + 1] == 0)) {
+				if (balls[i][j] == balls[i][j + 1]) {
 					count++;
 				}
 				if (count == 2) {
@@ -117,18 +120,13 @@ public class PoolModel {
 		int count = 0;
 		int tm = balls[i][j];
 		if (i != 0) {
-			if (tm == balls[i - 1][j] 
-					|| ((tm == 0 || tm == 2) 
-							&& (balls[i - 1][j] == 0 || balls[i - 1][j] == 2))){
+			if (tm == balls[i - 1][j] ){
 				count++;
 //				System.out.println(count + "up" );
 			}
 		}
 		if (j != 0) {
-			if (tm == balls[i][j - 1] 
-					|| ((tm == 0 || tm == 2) 
-							&& (balls[i][j - 1] == 0 || balls[i][j - 1] == 2))){
-
+			if (tm == balls[i][j - 1]){
 			count++;
 //				System.out.println(count + "left");
 			}
@@ -138,15 +136,11 @@ public class PoolModel {
 		}
 		count = 0;
 		if (i + j < 5 - 1) {
-			if (tm == balls[i][j + 1] 
-					|| ((tm == 0 || tm == 2) 
-							&& (balls[i][j + 1] == 0 || balls[i][j + 1] == 2))){
+			if (tm == balls[i][j + 1]){
 				count++;
 //				System.out.println(count + "right" );
 			}
-			if (tm == balls[i + 1][j] 
-					|| ((tm == 0 || tm == 2) 
-							&& (balls[i + 1][j] == 0 || balls[i + 1][j] == 2))){
+			if (tm == balls[i + 1][j]){
 				count++;
 //				System.out.println(count + "down");
 			}
@@ -172,10 +166,7 @@ public class PoolModel {
 				}
 			}
 		}
-		if ((balls[0][0] == balls[1][1] && balls[0][0] == balls[2][2])
-				|| ((balls[0][0] == 0 || balls[0][0] == 2)
-						&& (balls[1][1] == 0 || balls[1][1] == 2)
-						&& (balls[2][2] == 0 || balls[2][2] == 2))){
+		if ((balls[0][0] == balls[1][1] && balls[0][0] == balls[2][2])){
 			return false;
 		}
 		
@@ -183,10 +174,7 @@ public class PoolModel {
 	}
 	private boolean checkBallDiag(int i, int j) {
 		if (((balls[i][j] == balls[i - 1][j + 1]) 
-				&& (balls[i][j] == balls[i - 2][j + 2]))
-				|| ((balls[i][j] == 0 || balls[i][j] == 2) 
-					&& (balls[i - 1][j + 1] == 0 || balls[i - 1][j + 1] == 2) 
-				&& (balls[i - 2][j + 2] == 0 || balls[i - 2][j + 2] == 2))) {
+				&& (balls[i][j] == balls[i - 2][j + 2]))) {
 					return false;
 				}
 		return true;

@@ -30,23 +30,26 @@ public class PoolView extends JFrame {
 	private JPanel contentPane;
 	private JLabel txtrSet;
 	private PoolController controller ;
-	private AbstractButton radioButton;
-	private AbstractButton radioButton_1;
-	private AbstractButton radioButton_2;
-	private JRadioButton radioButton_5;
-	private JRadioButton radioButton_6;
-	private JRadioButton radioButton_9;
-	private JRadioButton radioButton_3;
-	private JRadioButton radioButton_7;
-	private JRadioButton radioButton_10;
-	private JRadioButton radioButton_12;
-	private JRadioButton radioButton_4;
-	private JRadioButton radioButton_8;
-	private JRadioButton radioButton_11;
-	private JRadioButton radioButton_13;
-	private JRadioButton radioButton_14;
+//	private AbstractButton radioButton;
+//	private AbstractButton radioButton_1;
+//	private AbstractButton radioButton_2;
+//	private JRadioButton radioButton_5;
+//	private JRadioButton radioButton_6;
+//	private JRadioButton radioButton_9;
+//	private JRadioButton radioButton_3;
+//	private JRadioButton radioButton_7;
+//	private JRadioButton radioButton_10;
+//	private JRadioButton radioButton_12;
+//	private JRadioButton radioButton_4;
+//	private JRadioButton radioButton_8;
+//	private JRadioButton radioButton_11;
+//	private JRadioButton radioButton_13;
+//	private JRadioButton radioButton_14;
 	private JButton btnCalculate;
 	private JButton btnNext;
+//	Graphics g  = contentPane.getGraphics();
+	
+
 
 	public void setController(PoolController controller) {
 		this.controller = controller;
@@ -69,6 +72,7 @@ public class PoolView extends JFrame {
 		});
 	}
 	public void initialize() {
+
 //		btnNext.setEnabled(false);
 	}
 
@@ -79,11 +83,13 @@ public class PoolView extends JFrame {
 		setTitle("Pool Set Generator");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+//		contentPane = new JPanel();
 		contentPane = new JPanel(){
 			public void paint(Graphics g) {				
-				drawSolution(g);
+				drawSolution(g, controller.getNext() );
 			};
 		};
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
@@ -132,75 +138,87 @@ public class PoolView extends JFrame {
 		
 		contentPane.add(txtrSet, "2, 2, 8, 1, fill, top");
 		
-		radioButton = new JRadioButton("");
-		radioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton, "11, 2");
-		
-		radioButton_1 = new JRadioButton("");
-		radioButton_1.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_1, "9, 4");
-		
-		radioButton_5 = new JRadioButton("");
-		radioButton_5.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_5, "13, 4");
-		
-		radioButton_2 = new JRadioButton("");
-		radioButton_2.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_2, "7, 6");
-		
-		radioButton_6 = new JRadioButton("");
-		radioButton_6.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_6, "11, 6");
-		
-		radioButton_9 = new JRadioButton("");
-		radioButton_9.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_9, "15, 6");
-		
-		radioButton_3 = new JRadioButton("");
-		radioButton_3.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_3, "5, 8");
-		
-		radioButton_7 = new JRadioButton("");
-		radioButton_7.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_7, "9, 8");
-		
-		radioButton_10 = new JRadioButton("");
-		radioButton_10.setHorizontalAlignment(SwingConstants.CENTER);
-		radioButton_10.setBackground(Color.BLACK);
-		radioButton_10.setForeground(Color.LIGHT_GRAY);
-		contentPane.add(radioButton_10, "13, 8, fill, fill");
-		
-		radioButton_12 = new JRadioButton("");
-		radioButton_12.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_12, "17, 8");
-		
-		radioButton_4 = new JRadioButton("");
-		radioButton_4.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_4, "3, 10");
-		
-		radioButton_8 = new JRadioButton("");
-		radioButton_8.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_8, "7, 10");
-		
-		radioButton_11 = new JRadioButton("");
-		radioButton_11.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_11, "11, 10");
-		
-		radioButton_13 = new JRadioButton("");
-		radioButton_13.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_13, "15, 10");
-		
-		radioButton_14 = new JRadioButton("");
-		radioButton_14.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(radioButton_14, "19, 10");
-		
+//		radioButton = new JRadioButton("");
+//		radioButton.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton, "11, 2");
+//		
+//		radioButton_1 = new JRadioButton("");
+//		radioButton_1.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_1, "9, 4");
+//		
+//		radioButton_5 = new JRadioButton("");
+//		radioButton_5.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_5, "13, 4");
+//		
+//		radioButton_2 = new JRadioButton("");
+//		radioButton_2.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_2, "7, 6");
+//		
+//		radioButton_6 = new JRadioButton("");
+//		radioButton_6.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_6, "11, 6");
+//		
+//		radioButton_9 = new JRadioButton("");
+//		radioButton_9.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_9, "15, 6");
+//		
+//		radioButton_3 = new JRadioButton("");
+//		radioButton_3.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_3, "5, 8");
+//		
+//		radioButton_7 = new JRadioButton("");
+//		radioButton_7.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_7, "9, 8");
+//		
+//		radioButton_10 = new JRadioButton("");
+//		radioButton_10.setHorizontalAlignment(SwingConstants.CENTER);
+//		radioButton_10.setBackground(Color.BLACK);
+//		radioButton_10.setForeground(Color.LIGHT_GRAY);
+//		contentPane.add(radioButton_10, "13, 8, fill, fill");
+//		
+//		radioButton_12 = new JRadioButton("");
+//		radioButton_12.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_12, "17, 8");
+//		
+//		radioButton_4 = new JRadioButton("");
+//		radioButton_4.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_4, "3, 10");
+//		
+//		radioButton_8 = new JRadioButton("");
+//		radioButton_8.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_8, "7, 10");
+//		
+//		radioButton_11 = new JRadioButton("");
+//		radioButton_11.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_11, "11, 10");
+//		
+//		radioButton_13 = new JRadioButton("");
+//		radioButton_13.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_13, "15, 10");
+//		
+//		radioButton_14 = new JRadioButton("");
+//		radioButton_14.setHorizontalAlignment(SwingConstants.CENTER);
+//		contentPane.add(radioButton_14, "19, 10");
+//		
 		
 		btnCalculate = new JButton("Calculate!");
+		btnCalculate.setSelected(true);
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.generateSets();
-
+				System.out.println(controller.getCount());
+				
 //				setButtons(controller.getNextSet());
+//				drawSolution(g,controller.getNext() );
+//				contentPane.paint(g);
+				
+				contentPane = new JPanel(){
+					public void paint(Graphics g) {				
+						drawSolution(g, controller.getNext() );
+					};
+				};
+				System.out.println("num:" + controller.getSetNum());
+				
 				
 				txtrSet.setText("Set 1 / " + controller.getCount());
 				btnNext.setEnabled(true);
@@ -208,7 +226,7 @@ public class PoolView extends JFrame {
 
 						
 				try {
-					setButtons(controller.getNextSet());
+//					setButtons(controller.getNextSet());
 					txtrSet.setText("Set 1 / " + controller.getCount());
 					btnNext.setEnabled(true);
 					btnCalculate.setEnabled(false);
@@ -221,6 +239,7 @@ public class PoolView extends JFrame {
 
 			}
 		});
+		contentPane.add(btnCalculate, "20, 14");
 		
 		
 		
@@ -228,14 +247,19 @@ public class PoolView extends JFrame {
 		btnNext.setEnabled(false);
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("num:" + controller.getSetNum());
+//				drawSolution(g,controller.getNext() );
 				
-//				drawSolution(Graphics g);
+				contentPane = new JPanel(){
+					public void paint(Graphics g) {				
+						drawSolution(g, controller.getNext() );
+					};
+				};
 //				setButtons(controller.getNextSet());
 				txtrSet.setText("Set " + controller.getSetNum() + " / " + controller.getCount());
 			}
 		});
-		contentPane.add(btnCalculate, "7, 14, 9, 1");
-		contentPane.add(btnNext, "7, 16, 9, 1");
+		contentPane.add(btnNext, "20, 16");
 
 	}
 
@@ -257,50 +281,47 @@ public class PoolView extends JFrame {
 //		radioButton_14.setSelected(set[14] != 1);
 //		
 //	}
-//	public void drawSolution(Graphics g, int sol) {	
-	public void drawSolution(Graphics g) {		
-		int sol = controller.getNext();
+	public void drawSolution(Graphics g, int sol) {	
+//	public void drawSolution(Graphics g) {		
+//		int sol = controller.getNext();
 		
-		int s = 30; //space between balls
-		int d = 10; //ball diameter
+		int s = 25; //space between balls
+		int d = 25; //ball diameter
 		int d2 = d + 2*s;
 		
 		Color vc = new Color(0xFF00FF);
-		Color vca = new Color(0x20FF00FF, true);
 		Color gc = new Color(0x00FF00);
-		Color gca = new Color(0x2000FF00, true);
 		Color bc = new Color(0x000000);
-		Color bca = new Color(0x20000000, true);				
-		
+			
 		Color f = vc;
-		Color fa = vca;
-		
+
 		for (int row = 0; row < 5; ++row) {
-			for (int col = 0; col <= 5 - row; ++col) {
+			for (int col = 0; col < 5 - row; ++col) {
 				int x = s + row * (d/2 + s );
 				int y = s + d/2 + col*(d + s);
 								
 				if ((sol & 1) != 0) {
 					f = vc;
-					fa = vca;
 				} else {
 					f = gc;
-					fa = gca;
 				}
 				
 				if ((row == 2) && (col == 1)) {
 					f = bc;
-					fa = bca;
 				}
 
 				g.setColor(f);
 				g.fillOval(x - d/2, y - d/2, d, d);
-				g.setColor(fa);
-				g.fillOval(x - d2/2, y - d2/2, d2, d2);				
 				sol >>= 1;
 			}			
 		}				
 	}
+	
+//	public void redraw(Graphics g) {
+//	public void redraw(Graphics g, int sol) {
+//		drawSolution(g, sol);
+//		
+//	}
 	
 	
 }

@@ -41,6 +41,8 @@ public class PoolController {
 		if (nSet >= model.getCount()){
 			nSet = model.getCount() % nSet;
 		}
+		System.out.println("nset:" + nSet);
+		
 		return (model.getSets()).get(nSet++);
 	}
 	
